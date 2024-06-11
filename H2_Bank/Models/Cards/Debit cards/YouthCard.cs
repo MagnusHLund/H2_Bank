@@ -7,7 +7,7 @@ namespace H2_Bank.Models.Cards.Debit_cards
 		internal YouthCard(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account)
 			: base(cardHolderName, cardNumber, expirationDate, account)
 		{
-			minimumAgeOfOwner = 18;
+			MinimumAgeOfOwnership = 18;
 			CanPayOnline = false;
 			CanPayInternational = false;
 		}

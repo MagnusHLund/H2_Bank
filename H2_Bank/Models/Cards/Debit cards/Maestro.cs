@@ -6,7 +6,7 @@ namespace H2_Bank.Models.Cards.Debit_cards
 	{
 		internal Maestro(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account) : base(cardHolderName, cardNumber, expirationDate, account)
 		{
-			minimumAgeOfOwner = 18;
+			MinimumAgeOfOwnership = 18;
 			CanPayOnline = true;
 			CanPayInternational = true;
 		}

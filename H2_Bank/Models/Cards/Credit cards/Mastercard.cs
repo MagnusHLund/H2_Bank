@@ -12,7 +12,7 @@ namespace H2_Bank.Models.Cards.Credit_cards
 
 		internal Mastercard(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account) : base(cardHolderName, cardNumber, expirationDate, account)
 		{
-			minimumAgeOfOwner = 18;
+			MinimumAgeOfOwnership = 18;
 			CanPayOnline = true;
 			CanPayInternational = true;
 			CreditLimit = 40000;

@@ -50,7 +50,7 @@ namespace H2_Bank.Models.Factories
 
 		private void DepositMoney(Client client)
 		{
-			client.account.Balance = _random.Next(1000, 10000);
+			client.Account.Balance = _random.Next(1000, 10000);
 		}
 	}
 }

@@ -4,8 +4,6 @@ namespace H2_Bank.Models.Cards
 {
 	internal abstract class Card
 	{
-		protected byte minimumAgeOfOwner;
-
 		protected string cardHolderName;
 		protected string cardNumber;
 		protected DateTime? expirationDate;
@@ -14,7 +12,7 @@ namespace H2_Bank.Models.Cards
 		internal protected bool CanPayOnline { get; set; }
 		internal protected bool CanHaveNegativeBalance { get; set; }
 		internal protected Account Account { get; }
-		protected byte minimumAgeOfOwnership { get; set; }
+		protected byte MinimumAgeOfOwnership { get; set; }
 
 		internal Card(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account) 
 		{

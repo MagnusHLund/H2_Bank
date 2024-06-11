@@ -9,7 +9,7 @@ namespace H2_Bank.Controllers
 {
 	internal class MainController
 	{
-		private View view = new View();
+		private View _view = new View();
 
 		private List<Client> _clients = new List<Client>();
 
@@ -19,7 +19,7 @@ namespace H2_Bank.Controllers
 			CreateCards();
 			ShowCardInfo();
 			SimulatePurchase();
-			view.Pause();
+			_view.Pause();
 		}
 
 		private void CreateClients()
@@ -42,7 +42,7 @@ namespace H2_Bank.Controllers
 
 				for (int i = 0;i < TotalCards; i++)
 				{
-					client.account.AddCardToAccount();
+					client.Account.AddCardToAccount();
 				}
 			}
 		}
@@ -51,11 +51,11 @@ namespace H2_Bank.Controllers
 		{
 			foreach (Client client in _clients)
 			{
-				List<Card> clientCards = client.account.Cards;
+				List<Card> clientCards = client.Account.Cards;
 
-				foreach (Card card in client.account.Cards)
+				foreach (Card card in client.Account.Cards)
 				{
-					view.Message(card.ToString());
+					_view.Message(card.ToString());
 				}
 			}
 		}
@@ -66,11 +66,11 @@ namespace H2_Bank.Controllers
 
 			foreach (Client client in _clients)
 			{
-				List<Card> clientCards = client.account.Cards;
+				List<Card> clientCards = client.Account.Cards;
 
-				view.Message($"Attempting purchase simulations with {client.Name}'s card(s)");
+				_view.Message($"Attempting purchase simulations with {client.Name}'s card(s)");
 
-				foreach(Card card in client.account.Cards)
+				foreach(Card card in client.Account.Cards)
 				{
 					purchaseController.LocalPurchase(card);
 					purchaseController.OnlinePurchase(card);
