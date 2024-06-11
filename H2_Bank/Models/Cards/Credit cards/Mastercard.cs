@@ -5,7 +5,7 @@ namespace H2_Bank.Models.Cards.Credit_cards
 	internal class Mastercard : CreditCard
 	{
 		private const double _dailyWithdrawlLimit = 5000;
-		private const double _MonthlyWithdrawlLimit = 40000;
+		private const double _monthlyWithdrawlLimit = 40000;
 
 		internal double RemainingDailyWithdrawlLimit { get; private set; }
 		internal double RemainingMonthlyWithdrawalLimit { get; private set; }
