@@ -1,26 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using H2_Bank.Models.Cards;
+using H2_Bank.Views;
+using System;
 
 namespace H2_Bank.Controllers
 {
 	internal class PurchaseController
 	{
-		internal void InternationalPurchase()
-		{
+		private Random random = new Random();
+		private View view = new View();
 
+		internal void InternationalPurchase(Card card)
+		{
+			view.Message("Attempting international purchase...");
+
+			if (card.CanPayInternational)
+			{
+				Purchase(card);
+			} 
+			else
+			{
+				view.Error("Purchase failed because the card is not allowed to perform international purchases");
+			}
 		}
 
-		internal void OnlinePurchase()
+		internal void OnlinePurchase(Card card)
 		{
+			view.Message("Attempting online purchase...");
 
+			if (card.CanPayOnline)
+			{
+				Purchase(card);
+			} 
+			else
+			{
+				view.Error("Purchase failed because the card is not allowed to perform online purchases");
+			}
 		}
 
-		internal void LocalPurchase()
+		internal void LocalPurchase(Card card)
 		{
+			Purchase(card);
+		}
 
+		private bool SufficientFunds(Card card, int price)
+		{
+			if(card.CanHaveNegativeBalance)
+			{
+				return true;
+			}
+
+			if(card.Account.Balance >= price)
+			{
+				return true;
+			} 
+			else
+			{
+				return false;
+			}
+		}
+
+		private void Purchase(Card card)
+		{
+			int price = random.Next(250, 1000);
+
+			if (SufficientFunds(card, price))
+			{
+				card.SpendMoney(price);
+				view.Success("Successful purchase!");
+			}
+			else
+			{
+				view.Error("Could not purchase, due to insufficient funds!");
+			}
 		}
 	}
 }

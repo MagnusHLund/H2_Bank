@@ -8,13 +8,16 @@ namespace H2_Bank.Models
 {
 	internal class Client
 	{
-		internal Account _account;
+		internal Account account;
 		internal string Name { get; set; }
+		internal byte Age { get; set; }
 
-		internal Client(string name) 
+		internal Client(string name, byte age) 
 		{
 			Name = name;
-			_account = new Account(name);
+			Age = age;
+
+			account = new Account(this);
 		}
 	}
 }

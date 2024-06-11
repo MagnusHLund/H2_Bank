@@ -8,9 +8,28 @@ namespace H2_Bank.Views
 {
 	internal class View
 	{
-		internal void Output(string message)
+		internal void Message(string message)
 		{
 			Console.WriteLine(message);
+		}
+
+		internal void Error(string message)
+		{
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine(message);
+			Console.ResetColor();
+		}
+
+		internal void Success(string message)
+		{
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine(message);
+			Console.ResetColor();
+		}
+
+		internal void Pause()
+		{
+			Console.ReadLine();
 		}
 	}
 }

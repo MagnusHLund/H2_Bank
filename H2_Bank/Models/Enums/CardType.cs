@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace H2_Bank.Controllers
+namespace H2_Bank.Models.Enums
 {
-	internal class AccountController
+	public enum CardType
 	{
-		internal void CreateAccounts()
-		{
-
-		}
+		Mastercard,
+		Maestro,
+		VisaDankort,
+		VisaElectron,
+		YouthCard
 	}
 }

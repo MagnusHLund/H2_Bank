@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using H2_Bank.Interfaces;
+using System;
 
 namespace H2_Bank.Models.Cards
 {
-	internal abstract class CreditCard : Card
+	internal abstract class CreditCard : Card, ICreditCard
 	{
+		public int CreditLimit { get; set;  }
+
+		internal CreditCard(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account) : base (cardHolderName, cardNumber, expirationDate, account)
+		{
+			CanHaveNegativeBalance = true;
+		}
 	}
 }

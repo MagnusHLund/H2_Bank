@@ -1,55 +1,39 @@
-﻿using H2_Bank.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace H2_Bank.Models.Cards
 {
-	internal abstract class Card : ICard
+	internal abstract class Card
 	{
-		protected string[] cardPrefix;
-		protected byte minimumAge;
-		protected string cardHolder;
-		protected DateTime expirationDate;
+		protected byte minimumAgeOfOwner;
 
-		internal Card(string name) 
+		protected string cardHolderName;
+		protected string cardNumber;
+		protected DateTime? expirationDate;
+
+		internal protected bool CanPayInternational { get; set;  }
+		internal protected bool CanPayOnline { get; set; }
+		internal protected bool CanHaveNegativeBalance { get; set; }
+		internal protected Account Account { get; }
+		protected byte minimumAgeOfOwnership { get; set; }
+
+		internal Card(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account) 
 		{
-			cardHolder = name;
+			this.cardHolderName = cardHolderName;
+			this.cardNumber = cardHolderName;
+			this.expirationDate = expirationDate;
+			Account = account;
 		}
 
-		public double Balance { get; set; }
-
-		public virtual string GenerateCardNumber()
+		public void SpendMoney(double amount)
 		{
-			return "";
+			Account.Balance -= amount;
 		}
 
-		public virtual void GenerateExpirationDate()
+		public override string ToString()
 		{
-			// Default max size: 5 år. YouthCard = null. Maestro = 5 år 8 måneder
-			Random random = new Random();
-
-			DateTime today = DateTime.Now;
-			DateTime maxDate = today.AddYears(5);
-
-			int dayRange = (today - maxDate).Days;
-			int randomDay = random.Next(dayRange);
-
-			expirationDate = today.AddDays(randomDay);
-		}
-
-		public virtual string GenerateCvvNumber()
-		{
-			Random random = new Random();
-			int cvv = random.Next(100, 1000);
-			return cvv.ToString();
-		}
-
-		public void SpendMoney(float amount)
-		{
-			Balance -= amount;
+			return $"Card type: {this.GetType().Name} \n" +
+				$"Card number: {cardNumber}" +
+				$"Card owner: {cardHolderName}";
 		}
 	}
 }

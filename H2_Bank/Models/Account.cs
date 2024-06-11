@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using H2_Bank.Models.Cards;
-using H2_Bank.Models.Cards.Credit_cards;
-using H2_Bank.Models.Cards.Debit_cards;
+using H2_Bank.Models.Factories;
 
 namespace H2_Bank.Models
 {
@@ -14,40 +8,23 @@ namespace H2_Bank.Models
 	{
 		internal List<Card> Cards { get; set; }
 
-		internal string AccountOwner { get; set; }
+		internal Client AccountOwner { get; set; }
+		internal string AccountNumber { get; set; }
+		internal double Balance { get; set; }
 
-		internal Account(string accountOwner) 
+		internal Account(Client accountOwner) 
 		{
 			AccountOwner = accountOwner;
+
+			Cards = new List<Card>();
 		}
 
 		internal void AddCardToAccount() 
 		{
-			Random random = new Random();
-			const byte totalCardTypes = 5;
-			byte randomValue = (byte)random.Next(totalCardTypes);
+			CardFactory cardFactory = new CardFactory();
+			Card card = cardFactory.CreateCard(this);
 
-			switch (randomValue)
-			{
-				case 0:
-					Cards.Add(new Mastercard());
-					break;
-				case 1:
-					Cards.Add(new Maestro());
-					break;
-				case 2:
-					Cards.Add(new VisaDankort());
-					break;
-				case 3:
-					Cards.Add(new VisaElectron());
-					break;
-				case 4:
-					Cards.Add(new YouthCard());
-					break;
-				default:
-					// Console log an error
-					break;
-			}
+			Cards.Add(card);
 		}
 	}
 }

@@ -1,13 +1,20 @@
 ﻿using H2_Bank.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace H2_Bank.Models.Cards.Debit_cards
 {
 	internal class VisaDankort : DebitCard, ICreditCard
 	{
+		public int CreditLimit { get; set; }
+
+		internal VisaDankort(string cardHolderName, string cardNumber, DateTime? expirationDate, Account account)
+			: base(cardHolderName, cardNumber, expirationDate, account)
+		{
+			minimumAgeOfOwner = 18;
+			CanPayOnline = true;
+			CanPayInternational = true;
+			CanHaveNegativeBalance = true;
+			CreditLimit = 20000;
+		}
 	}
 }

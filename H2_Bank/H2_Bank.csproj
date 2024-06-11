@@ -43,12 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
-    <Compile Include="Interfaces\ICard.cs" />
     <Compile Include="Interfaces\ICreditCard.cs" />
-    <Compile Include="Interfaces\IDebitCard.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Cards\Card.cs" />
     <Compile Include="Models\Cards\Credit cards\Mastercard.cs" />
@@ -59,7 +56,9 @@
     <Compile Include="Models\Cards\Debit cards\YouthCard.cs" />
     <Compile Include="Models\Cards\DebitCard.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Names.cs" />
+    <Compile Include="Models\Enums\CardType.cs" />
+    <Compile Include="Models\Factories\CardFactory.cs" />
+    <Compile Include="Models\Factories\ClientFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\View.cs" />
