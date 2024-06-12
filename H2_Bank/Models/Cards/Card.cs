@@ -26,7 +26,7 @@ namespace H2_Bank.Models.Cards
 		/// This method reduces the account balance, from a purchase
 		/// </summary>
 		/// <param name="amount"></param>
-		public void SpendMoney(double amount)
+		internal void SpendMoney(double amount)
 		{
 			Account.Balance -= amount;
 		}
