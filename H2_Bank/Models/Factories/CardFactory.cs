@@ -9,6 +9,7 @@ namespace H2_Bank.Models.Factories
 {
 	internal class CardFactory
 	{
+		// This dictionary has the maximum expiration date, for each card type.
 		private static readonly Dictionary<CardType, DateTime?> _expirationDate = new Dictionary<CardType, DateTime?>()
 		{
 			{ CardType.YouthCard, null },
@@ -18,6 +19,7 @@ namespace H2_Bank.Models.Factories
 			{ CardType.Mastercard, DateTime.Today.AddYears(5) }
 		};
 
+		// This dictionary has the card prefixes, for each card type.
 		private static readonly Dictionary<CardType, int[]> _cardPrefixes = new Dictionary<CardType, int[]>()
 		{
 			{ CardType.YouthCard, new int[] { 2400 } },
@@ -29,6 +31,13 @@ namespace H2_Bank.Models.Factories
 
 		private static readonly Random _random = new Random();
 
+		/// <summary>
+		/// Creates a card for the given account.
+		/// If the account owner is under 18, it randomly selects between YouthCard and VisaElectron.
+		/// If the account owner is 18 or older, it randomly selects between Maestro, VisaElectron, VisaDankort, and Mastercard.
+		/// </summary>
+		/// <param name="account">The account for which the card is being created.</param>
+		/// <returns>A card object associated with the given account.</returns>
 		internal Card CreateCard(Account account)
 		{
 			CardType cardType;
@@ -54,6 +63,16 @@ namespace H2_Bank.Models.Factories
 			return card;
 		}
 
+		/// <summary>
+		/// Maps the card type to the corresponding card class and creates an instance of that class.
+		/// </summary>
+		/// <param name="cardType">The type of the card.</param>
+		/// <param name="cardNumber">The card number.</param>
+		/// <param name="expirationDate">The card's expiration date.</param>
+		/// <param name="cvv">The CVV number.</param>
+		/// <param name="cardHolderName">The name of the cardholder.</param>
+		/// <param name="account">The associated account.</param>
+		/// <returns>An instance of the specific card type.</returns>
 		private Card MapCardType(CardType cardType, string cardNumber, DateTime? expirationDate, string cvv, string cardHolderName, Account account)
 		{
 			switch (cardType)
@@ -72,7 +91,12 @@ namespace H2_Bank.Models.Factories
 					throw new NotImplementedException();
 			}
 		}
-
+		/// <summary>
+		/// Generates a valid card number for the specified card type.
+		/// The card number is generated using the Luhn algorithm.
+		/// </summary>
+		/// <param name="cardType">The type of the card.</param>
+		/// <returns>A valid card number.</returns>
 		private string GenerateCardNumber(CardType cardType)
 		{
 			int[] cardPrefixes = _cardPrefixes[cardType];
@@ -100,6 +124,11 @@ namespace H2_Bank.Models.Factories
 			return cardNumber;
 		}
 
+		/// <summary>
+		/// Calculates the check digit for a card number using the Luhn algorithm.
+		/// </summary>
+		/// <param name="cardNumber">The partial card number without the check digit.</param>
+		/// <returns>The calculated check digit.</returns>
 		private int GetCheckDigit(string cardNumber)
 		{
 			int totalSum = 0;
@@ -126,7 +155,11 @@ namespace H2_Bank.Models.Factories
 			return modulus == 0 ? 0 : 10 - modulus;
 		}
 
-
+		/// <summary>
+		/// Generates a random expiration date for the card based on the card type's maximum expiration date.
+		/// </summary>
+		/// <param name="cardType">The type of the card.</param>
+		/// <returns>The generated expiration date, or null if no expiration date is set for the card type.</returns>
 		private DateTime? GenerateExpirationDate(CardType cardType)
 		{
 			DateTime today = DateTime.Today;
@@ -145,6 +178,10 @@ namespace H2_Bank.Models.Factories
 			return expirationDate;
 		}
 
+		/// <summary>
+		/// Generates a random CVV number.
+		/// </summary>
+		/// <returns>A three-digit CVV number.</returns>
 		private string GenerateCvvNumber()
 		{
 			int cvv = _random.Next(100, 1000);

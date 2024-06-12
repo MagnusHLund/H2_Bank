@@ -22,11 +22,19 @@ namespace H2_Bank.Models.Cards
 			Account = account;
 		}
 
+		/// <summary>
+		/// This method reduces the account balance, from a purchase
+		/// </summary>
+		/// <param name="amount"></param>
 		public void SpendMoney(double amount)
 		{
 			Account.Balance -= amount;
 		}
 
+		/// <summary>
+		/// This overrides the ToString method, to return a specific string, containing values of the card.
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return $"Card type: {this.GetType().Name} \n" +

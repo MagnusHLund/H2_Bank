@@ -9,6 +9,10 @@ namespace H2_Bank.Controllers
 		private Random _random = new Random();
 		private View _view = new View();
 
+		/// <summary>
+		/// This method attempts to perform a purchase, if the card allows international transactions.
+		/// </summary>
+		/// <param name="card">Card to perform payment</param>
 		internal void InternationalPurchase(Card card)
 		{
 			_view.Message("Attempting international purchase...");
@@ -23,6 +27,10 @@ namespace H2_Bank.Controllers
 			}
 		}
 
+		/// <summary>
+		/// This method attempts to perform a purchase, if the card allows online transactions.
+		/// </summary>
+		/// <param name="card">Card to perform payment</param>
 		internal void OnlinePurchase(Card card)
 		{
 			_view.Message("Attempting online purchase...");
@@ -37,11 +45,21 @@ namespace H2_Bank.Controllers
 			}
 		}
 
+		/// <summary>
+		/// This method attempts to perform a purchase.
+		/// </summary>
+		/// <param name="card">Card to perform payment</param>
 		internal void LocalPurchase(Card card)
 		{
 			Purchase(card);
 		}
 
+		/// <summary>
+		/// This method checks if the card has enough money to perform a payment.
+		/// </summary>
+		/// <param name="card">Card to pay with</param>
+		/// <param name="price">Total price of the purchase</param>
+		/// <returns></returns>
 		private bool SufficientFunds(Card card, int price)
 		{
 			if(card.CanHaveNegativeBalance)
@@ -59,6 +77,11 @@ namespace H2_Bank.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Comes up with a random price tag.
+		/// Spends money from the account if it has sufficient funds.
+		/// </summary>
+		/// <param name="card"></param>
 		private void Purchase(Card card)
 		{
 			int price = _random.Next(250, 1000);

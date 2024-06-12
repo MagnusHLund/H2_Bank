@@ -19,6 +19,10 @@ namespace H2_Bank.Models
 			Cards = new List<Card>();
 		}
 
+		/// <summary>
+		/// This method adds a card to the account. 
+		/// It creates the card itself, using the cardFactory
+		/// </summary>
 		internal void AddCardToAccount() 
 		{
 			CardFactory cardFactory = new CardFactory();

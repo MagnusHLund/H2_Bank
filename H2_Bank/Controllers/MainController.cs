@@ -10,9 +10,12 @@ namespace H2_Bank.Controllers
 	internal class MainController
 	{
 		private View _view = new View();
-
 		private List<Client> _clients = new List<Client>();
 
+		/// <summary>
+		/// Entry point for the MainController.
+		/// It calls the other methods within the class and pauses the program, using the View class.
+		/// </summary>
 		internal void Main()
 		{
 			CreateClients();
@@ -22,6 +25,10 @@ namespace H2_Bank.Controllers
 			_view.Pause();
 		}
 
+		/// <summary>
+		/// This method uses the ClientFactory class to create 10 new clients.
+		/// Each client then gets added to the _clients list.
+		/// </summary>
 		private void CreateClients()
 		{
 			ClientFactory clientFactory = new ClientFactory();
@@ -32,6 +39,10 @@ namespace H2_Bank.Controllers
 			}
 		}
 
+		/// <summary>
+		/// This method adds 1 or 2 cards to a clients account.
+		/// Each client gets looped through.
+		/// </summary>
 		private void CreateCards()
 		{
 			Random random = new Random();
@@ -47,6 +58,9 @@ namespace H2_Bank.Controllers
 			}
 		}
 
+		/// <summary>
+		/// This method shows each card information, for each of the clients.
+		/// </summary>
 		private void ShowCardInfo()
 		{
 			foreach (Client client in _clients)
@@ -60,6 +74,11 @@ namespace H2_Bank.Controllers
 			}
 		}
 
+		/// <summary>
+		/// This method creates some test purchases.
+		/// It uses the PurchaseController to create 3 purchase types, for each card.
+		/// These types are LocalPurchase, OnlinePurchase, InternationalPurchase.
+		/// </summary>
 		private void SimulatePurchase()
 		{
 			PurchaseController purchaseController = new PurchaseController();
